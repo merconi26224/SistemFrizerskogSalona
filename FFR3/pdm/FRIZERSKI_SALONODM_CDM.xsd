@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema 
+   elementFormDefault="qualified"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="Application">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="FrizerskiSalon">
+               <xs:complexType>
+                  <xs:attribute name="Pib" type="xs:byte" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="NazivSalona" type="xs:string" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="ImeVlasnika" type="DOMIME" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="PrezimeVlasnika" type="DOMPREZIME" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="Telefon" type="DOMTELEFON" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="SeNalazi_IdAdrese" type="xs:long">
+                  </xs:attribute>
+                  <xs:attribute name="Radi_IdOsoblja" type="xs:short">
+                  </xs:attribute>
+                  <xs:attribute name="Ima_IdOpreme" type="xs:string">
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="Drzava">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="Mesto">
+                        <xs:complexType>
+                           <xs:attribute name="PttBroj" type="xs:long" use="required">
+                           </xs:attribute>
+                           <xs:attribute name="NazivMesta" type="xs:string" use="required">
+                           </xs:attribute>
+                           <xs:attribute name="Postoji_IdAdrese" type="xs:long">
+                           </xs:attribute>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="IdDrzave" type="xs:byte" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="NazivDrzave" type="xs:string" use="required">
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="Osoblje" type="Osoblje">
+               <xs:complexType>
+                  <xs:attribute name="Sisa_IdMusterije" type="xs:decimal">
+                  </xs:attribute>
+                  <xs:attribute name="Radi_Pib" type="xs:byte">
+                  </xs:attribute>
+                  <xs:attribute name="Koristi_IdOpreme" type="xs:string">
+                  </xs:attribute>
+                  <xs:attribute name="Podsisava_IdOsobllja" type="xs:short">
+                  </xs:attribute>
+                  <xs:attribute name="Podsiisava_IdOsoblja" type="xs:short">
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="Musterija">
+               <xs:complexType>
+                  <xs:attribute name="IdMusterije" type="xs:decimal" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="Prezime" type="DOMPREZIME" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="Ime" type="DOMIME" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="DatumRodjenja" type="xs:dateTime">
+                  </xs:attribute>
+                  <xs:attribute name="Telefon" type="DOMTELEFON">
+                  </xs:attribute>
+                  <xs:attribute name="Email" type="xs:string">
+                  </xs:attribute>
+                  <xs:attribute name="Pol">
+                     <xs:simpleType>
+                       <xs:restriction base="xs:string">
+                          <xs:enumeration value="M"/>
+                          <xs:enumeration value="Z"/>
+                       </xs:restriction>
+                     </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="Jmbg" type="xs:string" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="Sisa_IdOsoblja" type="xs:short">
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="Adresa">
+               <xs:complexType>
+                  <xs:attribute name="IdAdrese" type="xs:long" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="NazivUlice" type="xs:string" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="KucniBroj" type="xs:string" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="Zivi_IdOsoblja" type="xs:short">
+                  </xs:attribute>
+                  <xs:attribute name="Postoji_PttBroj" type="xs:long">
+                  </xs:attribute>
+                  <xs:attribute name="Stanuje_IdMusterije" type="xs:decimal">
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="Oprema">
+               <xs:complexType>
+                  <xs:attribute name="IdOpreme" type="xs:string" use="required">
+                  </xs:attribute>
+                  <xs:attribute name="Naziv" type="DOMIME">
+                  </xs:attribute>
+                  <xs:attribute name="Stanje">
+                     <xs:simpleType>
+                       <xs:restriction base="xs:string">
+                          <xs:enumeration value="Nije funkcionalno"/>
+                          <xs:enumeration value="Funkcionalno"/>
+                       </xs:restriction>
+                     </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="Koristi_IdOsoblja" type="xs:short">
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="Frizer">
+               <xs:complexType>
+                  <xs:complexContent>
+                     <xs:extension base="Osoblje">
+                       <xs:attribute name="Licenca" type="xs:string" use="required">
+                       </xs:attribute>
+                     </xs:extension>
+                  </xs:complexContent>
+               </xs:complexType>
+            </xs:element>
+            <xs:element name="Asistent">
+               <xs:complexType>
+                  <xs:complexContent>
+                     <xs:extension base="Osoblje">
+                       <xs:attribute name="Saradnik" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:boolean">
+                               <xs:enumeration value="Tacno"/>
+                               <xs:enumeration value="Netacno"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                       </xs:attribute>
+                     </xs:extension>
+                  </xs:complexContent>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>   
+      </xs:complexType>
+      <xs:key name="PIB">
+         <xs:selector xpath="FrizerskiSalon"/>
+         <xs:field xpath="@Pib"/>
+      </xs:key>
+      <xs:key name="ID_DRZAVE">
+         <xs:selector xpath="Drzava"/>
+         <xs:field xpath="@IdDrzave"/>
+      </xs:key>
+      <xs:key name="ID_MESTO">
+         <xs:selector xpath="Drzava/Mesto"/>
+         <xs:field xpath="@PttBroj"/>
+      </xs:key>
+      <xs:key name="ID_OSOBLJE">
+         <xs:selector xpath="Osoblje"/>
+         <xs:field xpath="@IdOsoblja"/>
+      </xs:key>
+      <xs:key name="ID_MUSTERIJE">
+         <xs:selector xpath="Musterija"/>
+         <xs:field xpath="@IdMusterije"/>
+      </xs:key>
+      <xs:key name="ID_ADRESE">
+         <xs:selector xpath="Adresa"/>
+         <xs:field xpath="@IdAdrese"/>
+      </xs:key>
+      <xs:key name="ID_OPREMA">
+         <xs:selector xpath="Oprema"/>
+         <xs:field xpath="@IdOpreme"/>
+      </xs:key>
+      <xs:keyref name="ZIVI" refer="ID_OSOBLJE">
+         <xs:selector xpath="Adresa"/>
+         <xs:field xpath="Zivi_IdOsoblja"/>
+      </xs:keyref>
+      <xs:keyref name="SENALAZI" refer="ID_ADRESE">
+         <xs:selector xpath="FrizerskiSalon"/>
+         <xs:field xpath="SeNalazi_IdAdrese"/>
+      </xs:keyref>
+      <xs:keyref name="POSTOJI2" refer="ID_ADRESE">
+         <xs:selector xpath="Drzava/Mesto"/>
+         <xs:field xpath="Postoji_IdAdrese"/>
+      </xs:keyref>
+      <xs:keyref name="POSTOJI" refer="ID_MESTO">
+         <xs:selector xpath="Adresa"/>
+         <xs:field xpath="Postoji_PttBroj"/>
+      </xs:keyref>
+      <xs:keyref name="SISA2" refer="ID_OSOBLJE">
+         <xs:selector xpath="Musterija"/>
+         <xs:field xpath="Sisa_IdOsoblja"/>
+      </xs:keyref>
+      <xs:keyref name="SISA" refer="ID_MUSTERIJE">
+         <xs:selector xpath="Osoblje"/>
+         <xs:field xpath="Sisa_IdMusterije"/>
+      </xs:keyref>
+      <xs:keyref name="RADI2" refer="ID_OSOBLJE">
+         <xs:selector xpath="FrizerskiSalon"/>
+         <xs:field xpath="Radi_IdOsoblja"/>
+      </xs:keyref>
+      <xs:keyref name="RADI" refer="PIB">
+         <xs:selector xpath="Osoblje"/>
+         <xs:field xpath="Radi_Pib"/>
+      </xs:keyref>
+      <xs:keyref name="STANUJE" refer="ID_MUSTERIJE">
+         <xs:selector xpath="Adresa"/>
+         <xs:field xpath="Stanuje_IdMusterije"/>
+      </xs:keyref>
+      <xs:keyref name="IMA" refer="ID_OPREMA">
+         <xs:selector xpath="FrizerskiSalon"/>
+         <xs:field xpath="Ima_IdOpreme"/>
+      </xs:keyref>
+      <xs:keyref name="KORISTI2" refer="ID_OSOBLJE">
+         <xs:selector xpath="Oprema"/>
+         <xs:field xpath="Koristi_IdOsoblja"/>
+      </xs:keyref>
+      <xs:keyref name="KORISTI" refer="ID_OPREMA">
+         <xs:selector xpath="Osoblje"/>
+         <xs:field xpath="Koristi_IdOpreme"/>
+      </xs:keyref>
+      <xs:keyref name="PODSISAVA2" refer="ID_OSOBLJE">
+         <xs:selector xpath="Osoblje"/>
+         <xs:field xpath="Podsisava_IdOsoblja"/>
+      </xs:keyref>
+      <xs:keyref name="PODSISAVA" refer="ID_OSOBLJE">
+         <xs:selector xpath="Osoblje"/>
+         <xs:field xpath="Podsisava_IdOsoblja"/>
+      </xs:keyref>
+   </xs:element>
+   <xs:simpleType name="DOMTELEFON">
+     <xs:restriction base="xs:string">
+     </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="DOMIME">
+     <xs:restriction base="xs:string">
+     </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="DOMPREZIME">
+     <xs:restriction base="xs:string">
+     </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="Osoblje">
+      <xs:attribute name="IdOsoblja" type="xs:short" use="required">
+      </xs:attribute>
+      <xs:attribute name="Prezime" type="DOMPREZIME" use="required">
+      </xs:attribute>
+      <xs:attribute name="Ime" type="DOMIME" use="required">
+      </xs:attribute>
+      <xs:attribute name="Telefon" type="DOMTELEFON">
+      </xs:attribute>
+      <xs:attribute name="Email" type="xs:string">
+      </xs:attribute>
+      <xs:attribute name="DatumRodjenja" type="xs:dateTime">
+      </xs:attribute>
+      <xs:attribute name="Jmbg" type="xs:string" use="required">
+      </xs:attribute>
+      <xs:attribute name="Pol">
+         <xs:simpleType>
+           <xs:restriction base="xs:string">
+              <xs:enumeration value="M"/>
+              <xs:enumeration value="Z"/>
+           </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+   </xs:complexType>
+</xs:schema>
